@@ -20,3 +20,14 @@ def auth_required(f):
         return f(*args, **kwargs)
     
     return wrapper
+
+def role_required(*roles):
+    def decorator(f):
+        @wraps(f)
+        @auth_required
+        def wrapper(*args, **kwargs):
+            if g.current_user.role not in roles:
+                return {"erro": "Acesso negado"}, 403
+            return f(*args, **kwargs)
+        return wrapper
+    return decorator

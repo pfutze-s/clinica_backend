@@ -1,15 +1,20 @@
 from flask import Blueprint, request
 from services.tutor_service import TutorService
+from auth.decorators import auth_required, role_required
 
 tutor_bp = Blueprint("tutor_bp", __name__)
 
 @tutor_bp.route("/tutores", methods=["POST"])
+@auth_required
+@role_required("adm")
 def criar():
     data = request.json
     tutor = TutorService.create_tutor(data)
     return {"id": tutor.id, "nome": tutor.nome}, 201
 
 @tutor_bp.route("/tutores", methods=["GET"])
+@auth_required
+@role_required("adm")
 def listar():
     tutores = TutorService.list_tutores()
     return [
@@ -18,6 +23,8 @@ def listar():
     ]
 
 @tutor_bp.route("/tutores/<int:tutor_id>", methods=["GET"])
+@auth_required
+@role_required("adm")
 def obter(tutor_id):
     tutor = TutorService.get_tutor(tutor_id)
     if not tutor:
@@ -26,6 +33,8 @@ def obter(tutor_id):
     return {"id": tutor.id, "nome": tutor.nome, "telefone": tutor.telefone, "email": tutor.email}
 
 @tutor_bp.route("/tutor/<int:tutor_id>", methods=["PUT"])
+@auth_required
+@role_required("adm")
 def atualizar(tutor_id):
     data = request.json
     tutor = TutorService.update_tutor(tutor_id, data)
@@ -35,6 +44,8 @@ def atualizar(tutor_id):
     return {"id": tutor.id, "nome": tutor.nome, "telefone": tutor.telefone, "email": tutor.email}
 
 @tutor_bp.route("/tutores/<int:tutor_id>", methods=["DELETE"])
+@auth_required
+@role_required("adm")
 def deletar(tutor_id):
     ok = TutorService.delete_tutor(tutor_id)
     if not ok:

@@ -3,14 +3,21 @@ from models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
 import secrets
 
+roles_validos = {"adm", "tutor", "veterinario"}
 class AuthService:
 
     @staticmethod
     def register(data):
+        role = data.get("role", "adm") # recebe o papel/role
+
+        if role not in roles_validos:
+            return {"erro": "Inválido"}
+
         session = SessionLocal()
         user = User(
             email=data["email"],
-            password_hash=generate_password_hash(data["password"])
+            password_hash=generate_password_hash(data["password"]),
+            role=role 
         )
         session.add(user)
         session.commit()
