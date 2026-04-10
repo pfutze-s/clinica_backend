@@ -9,3 +9,4 @@ class User(Base):
     password_hash = Column(String, nullable=False)
     token = Column(String)
     role = Column(String, nullable=False, default="adm")
+    tutor_id = Column(Integer, nullable=True)

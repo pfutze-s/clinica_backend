@@ -11,13 +11,14 @@ class AuthService:
         role = data.get("role", "adm") # recebe o papel/role
 
         if role not in roles_validos:
-            return {"erro": "Inválido"}
+            return None, "Inválido"
 
         session = SessionLocal()
         user = User(
             email=data["email"],
             password_hash=generate_password_hash(data["password"]),
-            role=role 
+            role=role,
+            tutor_id=data.get("tutor_id", None)
         )
         session.add(user)
         session.commit()

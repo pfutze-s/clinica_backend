@@ -19,3 +19,24 @@ class AnimalService:
         animais = session.query(Animal).all()
         session.close()
         return animais    
+
+    @staticmethod
+    def get_animal(animal_id):
+        session = SessionLocal()
+        animal = session.query(Animal).filter(Animal.id == animal_id).first()
+        session.close()
+        return animal
+
+    @staticmethod
+    def delete_animal(animal_id):
+        session = SessionLocal()
+        animal = session.query(Animal).filter(Animal.id == animal_id).first()
+        if not animal:
+            
+            session.close()
+            return False
+        
+        session.delete(animal)
+        session.commit()
+        session.close()
+        return True
