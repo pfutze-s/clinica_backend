@@ -23,7 +23,7 @@ class AuthService:
         session.commit()
         session.refresh(user)
         session.close()
-        return user
+        return user, None
         
     @staticmethod
     def login(data):

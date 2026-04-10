@@ -8,6 +8,4 @@ class User(Base):
     email = Column(String, unique=True, nullable=False)
     password_hash = Column(String, nullable=False)
     token = Column(String)
-    adm = Column(String) # pode mexer em tudo
-    tutor = Column(String) # pode adicionar/remover só os próprios animais
-    veterinario = Column(String) # pode adicionar/remover qualquer animal
+    role = Column(String, nullable=False, default="adm")
