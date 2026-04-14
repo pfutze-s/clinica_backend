@@ -1,6 +1,6 @@
 # ATIVIDADE DE CLINICA VET
 
-Repositório feito unicamente para postar a atividade do cursinho, mas falta coisa (e muita)!
+repositório feito unicamente para postar a atividade do cursinho!
 
 
-ps: fui atrás de aprender sobre role só pra isso, to me ferrando toda
+ps: fui atrás de aprender sobre role só pra isso, mas finalmente deu certo
