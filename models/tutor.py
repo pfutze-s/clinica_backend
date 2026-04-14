@@ -5,6 +5,6 @@ class Tutor(Base):
     __tablename__ = "tutores"
 
     id = Column(Integer, primary_key=True)
-    nome = Column(String)
+    nome = Column(String, nullable=False)
     telefone = Column(String)
     email = Column(String)
